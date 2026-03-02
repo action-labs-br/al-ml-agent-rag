@@ -118,18 +118,27 @@ Natural language question → agent response. The agent decides between searchin
 
 ---
 
+## Deliverables
+
+1. **Working API** — `docker compose up` starts the application on port 8000 with all 3 endpoints functional
+2. **EDA notebook** — `notebooks/exploration.ipynb` showing your data exploration, feature engineering, model selection, and evaluation. This is reviewed.
+3. **README** — Document your architecture, how to run, framework choices, and trade-offs
+
+You design the module structure. The only contract is the API schemas in `app/models.py` and the endpoint paths in `app/main.py`.
+
+---
+
 ## Provided files
 
-Stubs with a defined interface. You may add files and dependencies, but keep the existing property names — the interface is the contract.
+You may add files and dependencies, but keep the existing API schemas — the interface is the contract.
 
 | File | Description |
 |------|-------------|
 | `app/main.py` | FastAPI endpoints — `/health` (done), `/predict` and `/chat` (to implement) |
 | `app/models.py` | Pydantic request/response schemas (with validation) |
 | `app/config.py` | Environment variables (API key, model name) |
-| `app/predictor.py` | `CardPopularityPredictor` — `train()` and `predict()` to implement |
-| `app/agent.py` | `SpellForgeAgent` — `process_message()` to implement |
 | `data/mtg_cards.csv` | ~10,000 rows of MTG card data (Kaggle / Scryfall). Target: `edhrec_rank`. Start with an EDA. |
+| `notebooks/exploration.ipynb` | Starter notebook for EDA and model development (reviewed as part of evaluation) |
 | `data/docs/` | 6 markdown documents — knowledge base for the RAG agent |
 
 ---
@@ -152,16 +161,27 @@ Stubs with a defined interface. You may add files and dependencies, but keep the
    ```bash
    cp .env.example .env
    ```
-3. **Implement the solution** — fill in the stubs in `app/`
-4. **Make sure Docker works** — `docker compose up` must start the complete application
-5. **Test the 3 endpoints** — `/health`, `/predict`, and `/chat`
+3. **Explore the data** — use `notebooks/exploration.ipynb` to understand the dataset and develop your model
+4. **Implement the solution** — design your own module structure in `app/`, keeping the API contract from `models.py`
+5. **Make sure Docker works** — `docker compose up` must start the complete application
+6. **Test the 3 endpoints** — `/health`, `/predict`, and `/chat`
 
 ---
 
 ## Evaluation
 
-We evaluate correctness, code quality, and technical decisions. Include in your README the choices you made and why.
+We evaluate across two dimensions:
 
-**Expected time:** 4-6 hours. Focus on a clean, working solution over polish.
+**Automated tests (5 pts)** — tiered by difficulty:
+- **Basic**: API health, schema validation, input validation
+- **Intermediate**: Model quality (MAE, R²), RAG retrieval, tool calling
+- **Advanced**: Adversarial predictions, response quality, robustness
+
+**Manual review (5 pts):**
+- **ML Pipeline (2 pts)** — evaluated from your notebook: EDA depth, feature engineering, model choice, temporal confound awareness
+- **Agent & RAG (2 pts)** — chunking strategy, tool definitions, source tracking, system prompt quality
+- **Code Quality (1 pt)** — module design, README, error handling, Docker setup
+
+Include in your README the architecture choices you made and why. Show your ML thinking in the notebook.
 
 No hosting required. Publish to a public GitHub repository and share the link.
