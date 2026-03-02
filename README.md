@@ -162,4 +162,6 @@ Stubs with a defined interface. You may add files and dependencies, but keep the
 
 We evaluate correctness, code quality, and technical decisions. Include in your README the choices you made and why.
 
+**Expected time:** 4-6 hours. Focus on a clean, working solution over polish.
+
 No hosting required. Publish to a public GitHub repository and share the link.

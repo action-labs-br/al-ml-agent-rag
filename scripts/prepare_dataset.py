@@ -1,8 +1,8 @@
 """
 Dataset preparation for SpellForge MTG challenge.
 
-The full pipeline lives in the answer repo (scripts/generate_dataset.py).
 This script is a placeholder — the data is pre-generated in data/mtg_cards.csv.
+Source: Scryfall bulk data (Feb 2023 snapshot), filtered to cards with EDHREC rank.
 """
 
 print("Dataset already prepared. See data/mtg_cards.csv")
